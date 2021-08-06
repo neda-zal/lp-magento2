@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+        <carriers>
+            <lpcarrier>
+                <active>1</active>
+                <status>0</status>
+                <lpcarriershipping>
+                    <sallowspecific>0</sallowspecific>
+                    <name>Lietuvos</name>
+                    <price>0.00</price>
+                    <title>Paštas</title>
+                    <specificerrmsg>Pristatymo būdas negalimas jūsų šaliai.</specificerrmsg>
+                    <available_services>0</available_services>
+                    <call_courier_automatically>1</call_courier_automatically>
+                </lpcarriershipping>
+                <lpcarrierapi>
+                    <test_mode>1</test_mode>
+                </lpcarrierapi>
+                <lpcarriersender>
+                    <sender_country>118</sender_country>
+                </lpcarriersender>
+                <lpcarriershipping_other_settings>
+                    <consigment_formation>priority,registered</consigment_formation>
+                </lpcarriershipping_other_settings>
+                <model>Eshoper\LPShipping\Model\Carrier\LPCarrier</model>
+            </lpcarrier>
+            <!-- carrier-config -->
+        </carriers>
+    </default>
+</config>

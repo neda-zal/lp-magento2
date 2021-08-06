@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Config\Model\Config">
+        <plugin name="admin_system_config_save_plugin"
+                type="Eshoper\LPShipping\Plugin\SaveConfigPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="add_lpexpress_terminal"
+                type="Eshoper\LPShipping\Plugin\Checkout\LayoutProcessorPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="save_in_quote"
+                type="Eshoper\LPShipping\Plugin\Checkout\ShippingInformationManagementPlugin" sortOrder="10" />
+    </type>
+    <type name="Magento\Shipping\Controller\Adminhtml\Order\Shipment\RemoveTrack">
+        <plugin name="remove_track_plugin"
+                type="Eshoper\LPShipping\Plugin\Adminhtml\Order\Shipment\RemoveTrackPlugin" sortOrder="10" />
+    </type>
+    <type name="Magento\Shipping\Controller\Adminhtml\Order\Shipment\Save">
+        <plugin name="save_shipment_plugin"
+                type="Eshoper\LPShipping\Plugin\Adminhtml\Order\Shipment\SavePlugin" sortOrder="10" />
+    </type>
+    <preference for="Eshoper\LPShipping\Api\Data\CN22Interface" type="Eshoper\LPShipping\Model\CN22"/>
+    <preference for="Eshoper\LPShipping\Api\CN22RepositoryInterface" type="Eshoper\LPShipping\Model\CN22Repository"/>
+    <preference for="Eshoper\LPShipping\Api\Data\CN23Interface" type="Eshoper\LPShipping\Model\CN23"/>
+    <preference for="Eshoper\LPShipping\Api\CN23RepositoryInterface" type="Eshoper\LPShipping\Model\CN23Repository"/>
+    <preference for="Eshoper\LPShipping\Api\Data\TrackingInterface" type="Eshoper\LPShipping\Model\Tracking"/>
+    <preference for="Eshoper\LPShipping\Api\TrackingRepositoryInterface" type="Eshoper\LPShipping\Model\TrackingRepository"/>
+    <preference for="Eshoper\LPShipping\Api\Data\ShippingTemplatesInterface" type="Eshoper\LPShipping\Model\ShippingTemplates" />
+    <preference for="Eshoper\LPShipping\Api\ShippingTemplateRepositoryInterface" type="Eshoper\LPShipping\Model\ShippingTemplateRepository" />
+    <preference for="Eshoper\LPShipping\Api\Data\LPExpressTerminalsInterface" type="Eshoper\LPShipping\Model\LPExpressTerminals" />
+    <preference for="Eshoper\LPShipping\Api\LPExpressTerminalRepositoryInterface" type="Eshoper\LPShipping\Model\LPExpressTerminalRepository" />
+    <preference for="Eshoper\LPShipping\Api\Data\SenderInterface" type="Eshoper\LPShipping\Model\Sender"/>
+    <preference for="Eshoper\LPShipping\Api\SenderRepositoryInterface" type="Eshoper\LPShipping\Model\SenderRepository" />
+</config>
