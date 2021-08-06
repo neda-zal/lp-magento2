@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="lp_api_refresh_token" instance="Eshoper\LPShipping\Cron\RefreshToken" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
+        <job name="lp_tracking_events" instance="Eshoper\LPShipping\Cron\Tracking" method="execute">
+            <schedule>0 * * * *</schedule>
+        </job>
+        <job name="lp_terminal_renew" instance="Eshoper\LPShipping\Cron\Terminal" method="execute">
+            <schedule>0 0 * * SUN</schedule>
+        </job>
+    </group>
+</config>

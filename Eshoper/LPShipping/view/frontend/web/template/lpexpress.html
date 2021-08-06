@@ -1,0 +1,19 @@
+<div data-bind="visible: selectedMethod () == 'lpcarrierlpexpress_terminal'">
+    <label data-bind="i18n: 'LP EXPRESS Terminal'"></label>
+    <select name="lpexpress-terminal-city" style="margin-top: 10px;" id="lpexpress-terminal-city-list"
+            data-bind="
+            options: availableTerminalCities,
+            optionsCaption: selectTerminalCityCaption,
+            value: selectedTerminalCity"
+            data-mage-init='{"validation":{}}' data-validate='{"required":true}'></select>
+    <select name="lpexpress-terminal" style="margin-top: 10px;" class="select-terminal-required"
+            id="lpexpress-terminal-list"
+            data-bind="
+            options: availableTerminals,
+            optionsText: 'name',
+            optionsValue: 'id',
+            optionsCaption: selectTerminalCaption,
+            visible: selectedTerminalCity"
+            data-mage-init='{"validation":{}}' data-validate='{"required":true}'>
+    </select>
+</div>
