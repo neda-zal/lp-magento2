@@ -17,6 +17,7 @@ class LabelFormat implements \Magento\Framework\Data\OptionSourceInterface
     public function toOptionArray()
     {
         return [
+            [ 'value' => 'LAYOUT_A4', 'label' => 'LAYOUT_A4' ],
             [ 'value' => 'LAYOUT_MAX', 'label' => 'LAYOUT_MAX' ],
             [ 'value' => 'LAYOUT_10x15', 'label' => 'LAYOUT_10x15' ]
         ];
