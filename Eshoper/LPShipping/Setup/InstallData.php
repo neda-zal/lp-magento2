@@ -35,7 +35,6 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
                 ->where('status = :status');
 
             $bind = [':status' => 'lp_courier_called'];
-
             $exists = $setup->getConnection()->fetchOne($select, $bind);
 
             if ( !$exists ) {
