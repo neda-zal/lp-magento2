@@ -67,7 +67,6 @@ class ShippingTemplateRepository implements \Eshoper\LPShipping\Api\ShippingTemp
             });
 
             $template = reset ( $template );
-
             return $template;
         } else {
             throw new \Magento\Framework\Exception\NoSuchEntityException (

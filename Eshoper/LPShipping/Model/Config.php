@@ -40,8 +40,12 @@ class Config
     const CONFIG_PATH_LPEXPRESS_OVERSEAS_SIZE               = 'carriers/lpcarrier/lpcarriershipping_lpexpress/lpexpress_shipping_overseas_courier_size';
     const CONFIG_PATH_LPEXPRESS_OVERSEAS_DELIVERY           = 'carriers/lpcarrier/lpcarriershipping_lpexpress/lpexpress_overseas_delivery_time';
     const CONFIG_PATH_LP_POSTOFFICE_SIZE                    = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_postoffice_size';
+    const CONFIG_PATH_LP_POSTOFFICE_TYPE_SM                 = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_postoffice_type_sm';
+    const CONFIG_PATH_LP_POSTOFFICE_TYPE_L                  = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_postoffice_type_l';
     const CONFIG_PATH_LP_POSTOFFICE_DELIVERY                = 'carriers/lpcarrier/lpcarriershipping_lp/lp_postoffice_delivery_time';
     const CONFIG_PATH_LP_OVERSEAS_SIZE                      = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_overseas_size';
+    const CONFIG_PATH_LP_OVERSEAS_TYPE_SM                   = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_overseas_type_sm';
+    const CONFIG_PATH_LP_OVERSEAS_TYPE_L                    = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_overseas_type_l';
     const CONFIG_PATH_LP_OVERSEAS_DELIVERY                  = 'carriers/lpcarrier/lpcarriershipping_lp/lp_shipping_overseas_delivery_time';
     const CONFIG_PATH_LABEL_SIZE                            = 'carriers/lpcarrier/lpcarriershipping_other_settings/label_format';
     const CONFIG_PATH_CONSIGMENT_FORMATION                  = 'carriers/lpcarrier/lpcarriershipping_other_settings/consigment_formation';
@@ -337,9 +341,50 @@ class Config
                 break;
             case 'lpcarrier_lpcarrierlp_postoffice':
                 $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_POSTOFFICE_SIZE );
+
+                if ( $shippingType == 'S' ) {
+                    $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_POSTOFFICE_TYPE_SM );
+                    $shippingType = 'SMALL_' . $shippingType;
+                }
+
+                if ( $shippingType == 'M' ) {
+                    $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_POSTOFFICE_TYPE_SM );
+                    $shippingType = 'BIG_' . $shippingType;
+                }
+
+                if ( $shippingType == 'L' ) {
+                    $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_POSTOFFICE_TYPE_L );
+                }
                 break;
             case 'lpcarrier_lpcarrierlp_overseas':
                 $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_OVERSEAS_SIZE );
+
+                if ( $shippingType == 'S' ) {
+                    $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_OVERSEAS_TYPE_SM );
+                    if ( $shippingType == 'CORESPONDENCE' ) {
+                        $shippingType = 'SMALL_CORESPONDENCE';
+                    }
+
+                    if ( $shippingType == 'CORESPONDENCE_TRACKED' ) {
+                        $shippingType = 'SMALL_CORESPONDENCE_TRACKED';
+                    }
+                }
+
+                if ( $shippingType == 'M' ) {
+                    $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_OVERSEAS_TYPE_SM );
+
+                    if ( $shippingType == 'CORESPONDENCE' ) {
+                        $shippingType = 'BIG_CORESPONDENCE';
+                    }
+
+                    if ( $shippingType == 'CORESPONDENCE_TRACKED' ) {
+                        $shippingType = 'MEDIUM_CORESPONDENCE_TRACKED';
+                    }
+                }
+
+                if ( $shippingType == 'L' ) {
+                    $shippingType = $this->_config->getValue ( self::CONFIG_PATH_LP_OVERSEAS_TYPE_L );
+                }
                 break;
         }
 

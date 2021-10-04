@@ -28,11 +28,9 @@
                     </field>
                     <field id="api_login" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Username</label>
-                        <comment>Username from manosiuntos.post.lt</comment>
                     </field>
                     <field id="api_password" translate="label" type="password" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Password</label>
-                        <comment>Password from manosiuntos.post.lt</comment>
                     </field>
                 </group>
                 <group id="lpcarriersender" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
@@ -104,6 +102,20 @@
                         <label>Post Office Shipping Size</label>
                         <source_model>Eshoper\LPShipping\Model\Config\Source\LPShippingSizes</source_model>
                     </field>
+                    <field id="lp_shipping_postoffice_type_sm" type="select" translate="label" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Post Office Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toPostOfficeArraySM</source_model>
+                        <depends>
+                            <field id="lp_shipping_postoffice_size" separator=",">S,M</field>
+                        </depends>
+                    </field>
+                    <field id="lp_shipping_postoffice_type_l" type="select" translate="label" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Post Office Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toPostOfficeArrayL</source_model>
+                        <depends>
+                            <field id="lp_shipping_postoffice_size">L</field>
+                        </depends>
+                    </field>
                     <field id="lp_postoffice_delivery_time" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Post Office Delivery Time</label>
                         <comment>Example: 4 d.d.</comment>
@@ -115,9 +127,23 @@
                     </field>
                     <field id="lp_shipping_overseas_size" type="select" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Overseas Shipping Size</label>
-                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPShippingSizes::toOverseasOptionArray</source_model>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPShippingSizes::toOverseasSizesArray</source_model>
                     </field>
-                    <field id="lp_shipping_overseas_delivery_time" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="lp_shipping_overseas_type_sm" type="select" translate="label" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Overseas Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toOverseasArraySM</source_model>
+                        <depends>
+                            <field id="lp_shipping_overseas_size" separator=",">S,M</field>
+                        </depends>
+                    </field>
+                    <field id="lp_shipping_overseas_type_l" type="select" translate="label" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Overseas Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toOverseasArrayL</source_model>
+                        <depends>
+                            <field id="lp_shipping_overseas_size">L</field>
+                        </depends>
+                    </field>
+                    <field id="lp_shipping_overseas_delivery_time" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Overseas Delivery Time</label>
                         <comment>Example: 4 d.d.</comment>
                     </field>
