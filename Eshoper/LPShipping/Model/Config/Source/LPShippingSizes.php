@@ -35,9 +35,6 @@ class LPShippingSizes implements \Magento\Framework\Data\OptionSourceInterface
         ];
     }
 
-    /**
-     * @return array
-     */
     public function toOverseasOptionArray ()
     {
         return [

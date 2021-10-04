@@ -8,6 +8,8 @@
 Išbandykite naują bei nemokamą Lietuvos pašto modulį
 Magento 2 platformai ir auginkite savo e-verslą!
 
+<b>Modulis suderintas ir ištestuotas su 2.4.3 versija</b>
+
 <h1>Lithuanian Post module for Magento 2 platform</h1>
 <ul>
 <li>Easy and convenient module installation and administration</li>
@@ -17,3 +19,5 @@ Magento 2 platformai ir auginkite savo e-verslą!
 
 Try the new one and free Lithuanian Post module for 
 Magento 2 platform and grow your e-business!
+
+<b>Module compatible and tested with 2.4.3 version</b>
