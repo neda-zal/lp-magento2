@@ -36,6 +36,19 @@ class ShippingTemplateRepository implements \Eshoper\LPShipping\Api\ShippingTemp
     }
 
     /**
+     * @param $shippingTemplatesData
+     * @param $type
+     * @param $size
+     * @return array
+     */
+    public function searchShippingTemplate ( $shippingTemplatesData, $type, $size = null )
+    {
+        return array_filter ( $shippingTemplatesData, function ( $template ) use ( $type, $size ) {
+            return $template [ 'type' ] == $type && @$template [ 'size' ] == $size;
+        });
+    }
+
+    /**
      * @inheritDoc
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -62,9 +75,34 @@ class ShippingTemplateRepository implements \Eshoper\LPShipping\Api\ShippingTemp
 
         // Get shipping data from JSON
         if ( $shippingTemplatesData = json_decode ( $shippingTemplates->getShippingTemplates (), true ) ) {
-            $template = array_filter ( $shippingTemplatesData, function ( $template ) use ( $type, $size ) {
-                return $template [ 'type' ] == $type && @$template [ 'size' ] == $size;
-            });
+            $template = $this->searchShippingTemplate ( $shippingTemplatesData, $type, $size );
+
+            /**
+             * Fix for correspondence mistypes
+             */
+            if ( empty ( $template ) ) {
+                switch ( $type ) {
+                    case 'MEDIUM_CORESPONDENCE_TRACKED':
+                    case 'BIG_CORESPONDENCE':
+                        $type = 'MediumCorrespondence';
+                        break;
+                    case 'SMALL_CORESPONDENCE_TRACKED':
+                    case 'SMALL_CORESPONDENCE':
+                        $type = 'SmallCorrespondence';
+                        break;
+                    case 'PACKAGE':
+                        $type = 'Parcel';
+                        break;
+                    case 'LETTER':
+                        $type = 'Letter';
+                        break;
+                }
+
+                /**
+                 * Get shipping template according to type and/or size
+                 */
+                $template = $this->searchShippingTemplate ( $shippingTemplatesData, $type, $size );
+            }
 
             $template = reset ( $template );
 
