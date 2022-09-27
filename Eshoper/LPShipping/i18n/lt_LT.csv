@@ -250,3 +250,8 @@ Shipment Created,Siunta suformuota
 Shipment Not Created,Siunta nesuformuota
 Yes,Taip,
 No,Ne
+Post Office Shipping Type,Pristatymo į paštą siuntos tipas
+Overseas Shipping Type,Pristatymo į užsienį siuntos tipas
+Corespondence,Siunta
+Package,Siuntinys
+Corespondence Tracked,Siunta su sekimu

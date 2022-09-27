@@ -68,6 +68,20 @@ class LPExpressTerminalRepository
     {
         $formattedTerminalList = [];
 
+        // Terminal cities at top
+        $topList = [
+            'Vilnius',
+            'Kaunas',
+            'Klaipėda',
+            'Šiauliai',
+            'Panevežys',
+            'Alytus',
+            'Marijampolė',
+            'Utena',
+            'Telšiai',
+            'Tauragė'
+        ];
+
         /** @var \Eshoper\LPShipping\Model\ResourceModel\LPExpressTerminals\Collection $terminalCollection */
         $terminalCollection = $this->_terminalCollectionFactory->create ()->getItems ();
 
@@ -80,8 +94,30 @@ class LPExpressTerminalRepository
 
             // Formatted grouped list by city
             $formattedTerminalList [ $terminal->getCity () ][ $terminal->getTerminalId () ]
-                = sprintf ( '%s - %s', $terminal->getName (), $terminal->getAddress () );
+                = trim ( sprintf ( '%s - %s', $terminal->getName (), $terminal->getAddress () ) );
         }
+
+        // Sort terminals alphabetically
+        foreach ( $formattedTerminalList as $key => $list ) {
+            asort ( $formattedTerminalList [ $key ], SORT_ASC );
+        }
+
+        // Top sort cities
+        $ordered = [];
+
+        foreach ( $topList as $key ) {
+            if ( array_key_exists ( $key, $formattedTerminalList ) ) {
+                $ordered [ $key ] = $formattedTerminalList [ $key ];
+                // Unset top listed cities
+                unset ( $formattedTerminalList [ $key ] );
+            }
+        }
+
+        // Sort alphabetically
+        ksort ( $formattedTerminalList );
+
+        // Concat
+        $formattedTerminalList = $ordered + $formattedTerminalList;
 
         return $formattedTerminalList;
     }
