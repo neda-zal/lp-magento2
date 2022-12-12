@@ -48,7 +48,7 @@ class CheckoutProvider extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return [
             'terminal' => [
-                'list' => array_reverse ( $this->_terminalRepository->getList () )
+                'list' => $this->_terminalRepository->getList ()
             ],
             'lp_delivery_time' => [
                 'lpcarrierlp_postoffice' =>
