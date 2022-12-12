@@ -12,8 +12,8 @@ class ShippingTemplate extends \Magento\Framework\App\Helper\AbstractHelper
 {
     // Additional services IDs
     const ADDITIONAL_COD_ID         = 8;
-    const ADDITIONAL_PRIORITY_ID    = 1;
-    const ADDITIONAL_REGISTERED_ID  = 2;
+    const ADDITIONAL_PRIORITY_ID    = 2;
+    const ADDITIONAL_REGISTERED_ID  = 1;
 
     // Default constants for CN data
     const CN_PARCEL_TYPE = 'sell';
@@ -270,12 +270,20 @@ class ShippingTemplate extends \Magento\Framework\App\Helper\AbstractHelper
             $result [] = [ 'id' => self::ADDITIONAL_COD_ID, 'amount' => $amount ];
         }
 
-        if ( $priority ) {
-            $result [] = [ 'id' => self::ADDITIONAL_PRIORITY_ID ]; // Priority
-        }
+        if ( !in_array ( $templateId, [ 44, 45, 46, 47, 48, 49, 50, 51, 52,
+        53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 97, 98, 99, 100, 101, 102, 105, 108, 111, 114 ] ) ) {
+            // Has to be priority
+            if ( in_array ( $templateId, [ 74, 78, 70, 73 ] ) ) {
+                $result [] = [ 'id' => self::ADDITIONAL_PRIORITY_ID ];
+            }
 
-        if ( $registered || $templateId == 73 || $templateId == 70 ) {
-            $result [] = [ 'id' => self::ADDITIONAL_REGISTERED_ID ]; // Registered
+            if ( $priority && !in_array ( [ 'id' => self::ADDITIONAL_PRIORITY_ID ], $result ) ) {
+                $result [] = [ 'id' => self::ADDITIONAL_PRIORITY_ID ]; // Priority
+            }
+
+            if ( $registered && !in_array ( $templateId, [ 74, 78, 70, 73 ] ) ) {
+                $result [] = [ 'id' => self::ADDITIONAL_REGISTERED_ID ]; // Registered
+            }
         }
 
         return $result;

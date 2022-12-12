@@ -297,7 +297,7 @@ class Config
                     self::COURIER_CALLED_STATUS :
                     self::COURIER_NOT_CALLED_STATUS
             );
-        } else {
+        } else if ( $this->isLpMethod ( $order->getShippingMethod () ) ) {
             // Method is LP
             $order->setStatus (
                 self::SHIPMENT_CREATED_STATUS
