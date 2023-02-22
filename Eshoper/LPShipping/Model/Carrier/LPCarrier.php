@@ -61,6 +61,16 @@ class LPCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrierOnline im
      */
     protected $_LPExpressCountryRates;
 
+    /**
+     * @var \Eshoper\LPShipping\Model\ResourceModel\LPCountryRatesWeight $_LPCountryRatesWeight
+     */
+    protected $_LPCountryRatesWeight;
+
+    /**
+     * @var \Eshoper\LPShipping\Model\ResourceModel\LPExpressCountryRatesWeight $_LPExpressCountryRatesWeight
+     */
+    protected $_LPExpressCountryRatesWeight;
+
     /**]
      * @var \Eshoper\LPShipping\Model\ResourceModel\LPCountries\Collection $_LPCountries
      */
@@ -148,6 +158,8 @@ class LPCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrierOnline im
         \Eshoper\LPShipping\Model\ResourceModel\LPExpressTableRates $LPExpressTableRates,
         \Eshoper\LPShipping\Model\ResourceModel\LPCountryRates $LPCountryRates,
         \Eshoper\LPShipping\Model\ResourceModel\LPExpressCountryRates $LPExpressCountryRates,
+        \Eshoper\LPShipping\Model\ResourceModel\LPCountryRatesWeight $LPCountryRatesWeight,
+        \Eshoper\LPShipping\Model\ResourceModel\LPExpressCountryRatesWeight $LPExpressCountryRatesWeight,
         \Eshoper\LPShipping\Model\ResourceModel\LPCountries\Collection $LPCountries,
         \Eshoper\LPShipping\Helper\ApiHelper $apiHelper,
         \Eshoper\LPShipping\Helper\ShippingTemplate $shippingTemplateHelper,
@@ -171,24 +183,26 @@ class LPCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrierOnline im
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
         array $data = []
     ) {
-        $this->_rateResultFactory       = $rateResultFactory;
-        $this->_rateMethodFactory       = $rateMethodFactory;
-        $this->_LPTableRates            = $LPTableRates;
-        $this->_LPExpressTableRates     = $LPExpressTableRates;
-        $this->_LPCountryRates          = $LPCountryRates;
-        $this->_LPExpressCountryRates   = $LPExpressCountryRates;
-        $this->_LPCountries             = $LPCountries;
-		$this->_logger                  = $logger;
-		$this->_apiHelper               = $apiHelper;
-		$this->_shippingTemplateHelper  = $shippingTemplateHelper;
-		$this->_trackFactory            = $trackFactory;
-		$this->_trackStatusFactory      = $trackStatusFactory;
-		$this->_trackingRepository      = $trackingRepository;
-		$this->_senderRepository        = $senderRepository;
-		$this->_config                  = $config;
-		$this->_orderRepository         = $orderRepository;
-		$this->_labels                  = [];
-		$this->_test                    = [];
+        $this->_rateResultFactory               = $rateResultFactory;
+        $this->_rateMethodFactory               = $rateMethodFactory;
+        $this->_LPTableRates                    = $LPTableRates;
+        $this->_LPExpressTableRates             = $LPExpressTableRates;
+        $this->_LPCountryRates                  = $LPCountryRates;
+        $this->_LPExpressCountryRates           = $LPExpressCountryRates;
+        $this->_LPCountryRatesWeight            = $LPCountryRatesWeight;
+        $this->_LPExpressCountryRatesWeight     = $LPExpressCountryRatesWeight;
+        $this->_LPCountries                     = $LPCountries;
+		$this->_logger                          = $logger;
+		$this->_apiHelper                       = $apiHelper;
+		$this->_shippingTemplateHelper          = $shippingTemplateHelper;
+		$this->_trackFactory                    = $trackFactory;
+		$this->_trackStatusFactory              = $trackStatusFactory;
+		$this->_trackingRepository              = $trackingRepository;
+		$this->_senderRepository                = $senderRepository;
+		$this->_config                          = $config;
+		$this->_orderRepository                 = $orderRepository;
+		$this->_labels                          = [];
+		$this->_test                            = [];
 
         parent::__construct(
             $scopeConfig,
@@ -397,9 +411,17 @@ class LPCarrier extends \Magento\Shipping\Model\Carrier\AbstractCarrierOnline im
                     // Overseas rates
                     if ( $request->getDestCountryId () !== 'LT' ) {
                         if ( $service == 'lpcarriershipping_lp' ) {
-                            $rate = $this->_LPCountryRates->getRate ( $request->getDestCountryId () );
+                            if ( $this->getServiceConfigData ( $service, 'use_country_weight_rates' ) ) {
+                                $rate = $this->_LPCountryRatesWeight->getRate ( $request->getDestCountryId (), $request->getPackageWeight () );
+                            } else {
+                                $rate = $this->_LPCountryRates->getRate ( $request->getDestCountryId () );
+                            }
                         } else if ( $service == 'lpcarriershipping_lpexpress' ) {
-                            $rate = $this->_LPExpressCountryRates->getRate ( $request->getDestCountryId () );
+                            if ( $this->getServiceConfigData ( $service, 'use_country_weight_rates' ) ) {
+                                $rate = $this->_LPExpressCountryRatesWeight->getRate ( $request->getDestCountryId (), $request->getPackageWeight () );
+                            } else {
+                                $rate = $this->_LPExpressCountryRates->getRate ( $request->getDestCountryId () );
+                            }
                         }
 
                         if ( $rate != null && $rate != -1 ) {

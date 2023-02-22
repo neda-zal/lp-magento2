@@ -28,11 +28,9 @@
                     </field>
                     <field id="api_login" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Username</label>
-                        <comment>Username from manosiuntos.post.lt</comment>
                     </field>
                     <field id="api_password" translate="label" type="password" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Password</label>
-                        <comment>Password from manosiuntos.post.lt</comment>
                     </field>
                 </group>
                 <group id="lpcarriersender" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
@@ -104,6 +102,20 @@
                         <label>Post Office Shipping Size</label>
                         <source_model>Eshoper\LPShipping\Model\Config\Source\LPShippingSizes</source_model>
                     </field>
+                    <field id="lp_shipping_postoffice_type_sm" type="select" translate="label" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Post Office Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toPostOfficeArraySM</source_model>
+                        <depends>
+                            <field id="lp_shipping_postoffice_size" separator=",">S,M</field>
+                        </depends>
+                    </field>
+                    <field id="lp_shipping_postoffice_type_l" type="select" translate="label" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Post Office Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toPostOfficeArrayL</source_model>
+                        <depends>
+                            <field id="lp_shipping_postoffice_size">L</field>
+                        </depends>
+                    </field>
                     <field id="lp_postoffice_delivery_time" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Post Office Delivery Time</label>
                         <comment>Example: 4 d.d.</comment>
@@ -115,9 +127,23 @@
                     </field>
                     <field id="lp_shipping_overseas_size" type="select" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Overseas Shipping Size</label>
-                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPShippingSizes::toOverseasOptionArray</source_model>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPShippingSizes::toOverseasSizesArray</source_model>
                     </field>
-                    <field id="lp_shipping_overseas_delivery_time" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="lp_shipping_overseas_type_sm" type="select" translate="label" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Overseas Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toOverseasArraySM</source_model>
+                        <depends>
+                            <field id="lp_shipping_overseas_size" separator=",">S,M</field>
+                        </depends>
+                    </field>
+                    <field id="lp_shipping_overseas_type_l" type="select" translate="label" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Overseas Shipping Type</label>
+                        <source_model>Eshoper\LPShipping\Model\Config\Source\LPDeliveryMethods::toOverseasArrayL</source_model>
+                        <depends>
+                            <field id="lp_shipping_overseas_size">L</field>
+                        </depends>
+                    </field>
+                    <field id="lp_shipping_overseas_delivery_time" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Overseas Delivery Time</label>
                         <comment>Example: 4 d.d.</comment>
                     </field>
@@ -134,6 +160,17 @@
                     <field id="import_country" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Import Price vs Country</label>
                         <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPCountryRates\Rates</backend_model>
+                    </field>
+                    <field id="use_country_weight_rates" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Use Price vs Country vs Weight Table</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="export_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Export" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Export Price vs Country vs Weight</label>
+                    </field>
+                    <field id="import_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Import Price vs Country vs Weight</label>
+                        <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPCountryRatesWeight\Rates</backend_model>
                     </field>
                     <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Ship to Specific Countries</label>
@@ -244,6 +281,17 @@
                     <field id="import_country" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Import Price vs Country</label>
                         <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPExpressCountryRates\Rates</backend_model>
+                    </field>
+                    <field id="use_country_weight_rates" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Use Price vs Country vs Weight Table</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="export_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Export" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Export Price vs Country vs Weight</label>
+                    </field>
+                    <field id="import_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Import Price vs Country vs Weight</label>
+                        <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPExpressCountryRatesWeight\Rates</backend_model>
                     </field>
                     <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Ship to Specific Countries</label>

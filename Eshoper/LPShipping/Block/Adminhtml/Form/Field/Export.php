@@ -69,6 +69,14 @@ class Export extends \Magento\Framework\Data\Form\Element\AbstractElement
                 $fileName = 'lpexpress-country-rates';
                 $routePath = '*/*/exportLpExpressCountryRates';
                 break;
+            case 'carriers_lpcarrier_lpcarriershipping_lp_export_country_weight':
+                $fileName = 'lp-country-rates-weight';
+                $routePath = '*/*/exportLpCountryRatesWeight';
+                break;
+            case 'carriers_lpcarrier_lpcarriershipping_lpexpress_export_country_weight':
+                $fileName = 'lpexpress-country-rates-weight';
+                $routePath = '*/*/exportLpExpressCountryRatesWeight';
+                break;
         }
 
         $url = $this->_backendUrl->getUrl ( $routePath, $params );

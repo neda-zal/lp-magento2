@@ -27,10 +27,19 @@ define([
                         if ( city === selectedCity ) {
                             return $.map ( terminals, function ( terminal, id ) {
                                 return { id: id, name: terminal };
-                            });
+                            })
                         }
                     } )
                 );
+
+                let sel = $ ( '#lpexpress-terminal-list' );
+                let selected = sel.val (); // cache selected value, before reordering
+                let opts_list = sel.find ( 'option' );
+                let first_option = opts_list [ 0 ];
+                opts_list = opts_list.slice ( 1, opts_list.length );
+                opts_list.sort(function ( a, b ) { return $ ( a ).text() > $(b).text () ? 1 : -1; });
+                sel.html('').append ( first_option ).append(opts_list);
+                sel.val(selected); // set cached selected value
             });
         },
         selectedMethod: function () {
