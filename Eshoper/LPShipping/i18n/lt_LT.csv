@@ -1,4 +1,4 @@
-﻿Country,Šalis
+Country,Šalis
 Price,Kaina
 Weight To,Svoris iki
 Courier Price,Kurjerio kaina
@@ -255,3 +255,6 @@ Overseas Shipping Type,Pristatymo į užsienį siuntos tipas
 Corespondence,Siunta
 Package,Siuntinys
 Corespondence Tracked,Siunta su sekimu
+Use Price vs Country vs Weight Table,Naudoti kainą pagal šalį ir svorį
+Export Price vs Country vs Weight,Eksportuoti kainą pagal šalį ir svorį
+Import Price vs Country vs Weight,Importuoti kainą pagal šalį ir svorį

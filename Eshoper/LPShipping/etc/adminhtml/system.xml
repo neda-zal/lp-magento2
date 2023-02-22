@@ -161,6 +161,17 @@
                         <label>Import Price vs Country</label>
                         <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPCountryRates\Rates</backend_model>
                     </field>
+                    <field id="use_country_weight_rates" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Use Price vs Country vs Weight Table</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="export_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Export" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Export Price vs Country vs Weight</label>
+                    </field>
+                    <field id="import_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Import Price vs Country vs Weight</label>
+                        <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPCountryRatesWeight\Rates</backend_model>
+                    </field>
                     <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Ship to Specific Countries</label>
                         <source_model>Eshoper\LPShipping\Model\Config\Source\AvailableCountries::availableCountries</source_model>
@@ -270,6 +281,17 @@
                     <field id="import_country" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Import Price vs Country</label>
                         <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPExpressCountryRates\Rates</backend_model>
+                    </field>
+                    <field id="use_country_weight_rates" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Use Price vs Country vs Weight Table</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="export_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Export" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Export Price vs Country vs Weight</label>
+                    </field>
+                    <field id="import_country_weight" translate="label" type="Eshoper\LPShipping\Block\Adminhtml\Form\Field\Import" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Import Price vs Country vs Weight</label>
+                        <backend_model>Eshoper\LPShipping\Model\Config\Backend\LPExpressCountryRatesWeight\Rates</backend_model>
                     </field>
                     <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Ship to Specific Countries</label>

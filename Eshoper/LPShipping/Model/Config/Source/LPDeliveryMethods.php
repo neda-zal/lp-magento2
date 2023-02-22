@@ -21,7 +21,7 @@ class LPDeliveryMethods implements \Magento\Framework\Data\OptionSourceInterface
             [ 'value' => 'lp_overseas', 'label' => __( 'Delivery To Overseas' ) ]
         ];
     }
-  
+
     /**
      * @return array
      */
