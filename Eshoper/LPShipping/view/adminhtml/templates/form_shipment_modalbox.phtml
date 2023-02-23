@@ -351,12 +351,11 @@ if ( !$CN23 || !$CN23->getCnParts () ) {
             </div>
             <div class="admin__field">
                 <label for="sender_apartment" class="admin__field-label">
-                    <?php echo __('Apartment'); ?> <span style="color:red">*</span>
+                    <?php echo __('Apartment'); ?>
                 </label>
                 <div class="admin__field-control">
                     <input type="text" name="sender[sender_apartment]" value="<?php echo $sender [ 'apartment' ]; ?>"
-                           id="sender_apartment" class="admin__control-text"
-                           data-validate='{"required":true}' />
+                           id="sender_apartment" class="admin__control-text" />
                 </div>
             </div>
             <div class="admin__field">

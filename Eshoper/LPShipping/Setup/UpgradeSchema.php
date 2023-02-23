@@ -76,6 +76,16 @@ class UpgradeSchema implements UpgradeSchemaInterface
             $installer->getConnection ()->createTable ( $lpexpress_overseas_rates_weight );
         }
 
+        if ( version_compare ( $context->getVersion(), '1.1.1', '<' ) ) {
+            $installer->getConnection ()->modifyColumn (
+                $installer->getTable ( 'lp_sender_data' ),
+                'apartment', [
+                    'type' => Table::TYPE_TEXT,
+                    'nullable' => true
+                ]
+            );
+        }
+
         $installer->endSetup();
     }
 }
