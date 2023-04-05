@@ -140,7 +140,7 @@ class ShippingTemplate extends \Magento\Framework\App\Helper\AbstractHelper
         // Check if not in EU
         if ( !in_array ( $order->getShippingAddress ()->getCountryId (), $this->getEuCountries () ) ) {
             // CN22
-            if ( in_array ( $templateId, [ 42, 43, 70, 73 ] )
+            if ( in_array ( $templateId, [ 42, 43, 70, 73, 74, 78, 96 ] )
                 && $this->getSDRValue ( $order->getGrandTotal () ) < 300 ) {
                 return true;
             }
@@ -159,7 +159,7 @@ class ShippingTemplate extends \Magento\Framework\App\Helper\AbstractHelper
         // Check if not in EU
         if ( !in_array ( $order->getShippingAddress ()->getCountryId (), $this->getEuCountries () ) ) {
             // CN23
-            if ( in_array ( $templateId, [ 42, 43, 70, 73 ] )
+            if ( in_array ( $templateId, [ 42, 43, 70, 73, 74, 78, 96 ] )
                 && $this->getSDRValue ( $order->getGrandTotal () ) > 300 ) {
                 return true;
             }
